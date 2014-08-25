@@ -1,0 +1,5 @@
+INDEX VERSION 1.126
+C:\Users\ben\Desktop\dev\Spring Tutorial\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2870166398.index
+\BasicSpringApp\src
+C:\Users\ben\Desktop\dev\Spring Tutorial\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\394797265.index
+\BasicSpringApp\src

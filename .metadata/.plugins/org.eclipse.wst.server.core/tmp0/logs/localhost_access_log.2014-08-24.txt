@@ -1,0 +1,8 @@
+127.0.0.1 - - [24/Aug/2014:19:30:23 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:30:24 -0500] "GET /BasicSpringApp/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:30:24 -0500] "GET /BasicSpringApp/hello;jsessionid=4397581817FC5E7726235379FE516A82.jre8 HTTP/1.1" 200 233
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:31:26 -0500] "GET /BasicSpringApp/hello;jsessionid=4397581817FC5E7726235379FE516A82.jre8 HTTP/1.1" 200 220
+127.0.0.1 - - [24/Aug/2014:19:50:53 -0500] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:50:53 -0500] "GET /BasicSpringApp/WEB-INF/pages/hello.jsp HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:50:59 -0500] "GET /BasicSpringApp/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/Aug/2014:19:51:00 -0500] "GET /BasicSpringApp/hello;jsessionid=DEE6E141FECF6D621520157AB810B8CA.jre8 HTTP/1.1" 200 220
