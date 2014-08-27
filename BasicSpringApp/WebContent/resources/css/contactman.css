@@ -1,0 +1,40 @@
+body {
+	text-align:center;
+}
+
+table {
+	margin: 0 auto;
+}
+
+span {
+	font-weight:bold;
+}
+
+.addContactField {
+	width:100%;
+}
+
+#contactInformation {
+	display:none;
+}
+
+#query {
+	width: 65%;
+}
+
+#searchBtn {
+	width: 30%;
+}
+
+#contactList {
+	width: 100%;
+}
+
+#showAllBtn {
+	width:100%;
+}
+
+#addContactArea {
+	width:100%;
+	display: none;
+}

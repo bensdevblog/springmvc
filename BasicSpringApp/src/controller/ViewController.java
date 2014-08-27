@@ -8,10 +8,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewController 
 {
 	@RequestMapping("/hello")
-	public ModelAndView getView(ModelAndView mav)
+	public ModelAndView getHelloView(ModelAndView mav)
 	{
 		mav = new ModelAndView("hello");
 		mav.addObject("msg", "Hello World!");
+		return mav;
+	}
+	
+	@RequestMapping("/contact_manager")
+	public ModelAndView getContactView(ModelAndView mav)
+	{
+		mav = new ModelAndView("contact_manager");
 		return mav;
 	}
 }
