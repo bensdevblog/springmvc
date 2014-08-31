@@ -3,17 +3,26 @@ package dao;
 import java.util.ArrayList;
 import java.sql.*;
 
+import sec.Cryptography;
 import domain.Contact;
-
+import domain.User;
+/*
+ * DatabaseService
+ * Performs database operations
+ * 
+ * @author	Ben Hansen
+ * http://www.bensdevblog.com
+ */
 public class DatabaseService {
+	
+	//Connection info
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://192.168.1.101:3306/springmvc";
-
 	static final String USER = "springmvc";
 	static final String PASS = "password";
-
 	Connection conn = null;
 
+	//Open DB connection
 	public DatabaseService() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -22,7 +31,47 @@ public class DatabaseService {
 			ex.printStackTrace();
 		}
 	}
+	
+	/*
+	 * Adds a new user to the DB
+	 * 
+	 * @param user	User object to add
+	 * @return 		True if successful, otherwise false
+	 */
+	public boolean addUser(User user) {
+		Cryptography crypto = new Cryptography();
+		try {
+			byte[] salt = crypto.generateSalt();
+			byte[] encrypted_pass = crypto.getEncryptedPassword(user.getPassword(), salt);
+			PreparedStatement pst = conn
+					.prepareStatement("INSERT INTO users (user_name, email_addr,"
+							+ "phone_number, password, salt) VALUES (?,?,?,?,?)");
 
+			pst.setString(1, user.getUserName());
+			pst.setString(2, user.getEmail());
+			pst.setString(3, user.getPhone());
+			pst.setString(4, crypto.toHexString(encrypted_pass));
+			pst.setString(5, crypto.toHexString(salt));
+			pst.executeUpdate();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return true;
+	}
+	/*
+	 * Adds a new contact to the DB
+	 * 
+	 * @param contact	Contact object to add
+	 */
 	public void createContact(Contact contact) {
 		try {
 			PreparedStatement pst = conn
@@ -45,7 +94,11 @@ public class DatabaseService {
 			}
 		}
 	}
-
+	/*
+	 * Removes a contact from the DB
+	 * 
+	 * @param contactEmail	Contacts email address (unique identifier)
+	 */
 	public void removeContact(String contactEmail) {
 		try {
 			PreparedStatement pst = conn
@@ -64,16 +117,26 @@ public class DatabaseService {
 			}
 		}
 	}
-
-	public ArrayList<String> requestContactInfo(String contactName) {
+	
+	/*
+	 * Request a certain contacts information from DB
+	 * 
+	 * @param firstName	The first name of contact
+	 * @param lastName	The last name of contact
+	 * @return	The requested contacts information
+	 */
+	public ArrayList<String> requestContactInfo(String firstName, String lastName) {
 		ArrayList<String> requestedContact = new ArrayList<>();
 
 		try {
 			PreparedStatement pst = conn
 					.prepareStatement("SELECT first_name, last_name,"
-							+ "phone_number,email_addr FROM contacts WHERE first_name = ?");
+							+ "phone_number,email_addr FROM contacts WHERE first_name = ?"
+							+ " AND last_name = ?");
 
-			pst.setString(1, contactName);
+			pst.setString(1, firstName);
+			pst.setString(2, lastName);
+			
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
@@ -96,7 +159,11 @@ public class DatabaseService {
 
 		return requestedContact;
 	}
-
+	/*
+	 * Request all contact names from DB
+	 * 
+	 * @return	List of contacts first and last names
+	 */
 	public ArrayList<String> requestContactNames() {
 		ArrayList<String> contactNames = new ArrayList<>();
 		try {
@@ -120,6 +187,12 @@ public class DatabaseService {
 		return contactNames;
 	}
 
+	/*
+	 * Request certain contacts from DB
+	 * 
+	 * @param firstName	the first name of a contact
+	 * @return	list of contacts matching param argument
+	 */
 	public ArrayList<String> requestCertainContactNames(String firstName) {
 		ArrayList<String> contactNames = new ArrayList<>();
 		try {
