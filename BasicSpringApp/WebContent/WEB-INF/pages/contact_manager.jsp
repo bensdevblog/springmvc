@@ -9,13 +9,13 @@
 
 <!-- Contact Manager CSS -->
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/contactman.css" />">
+	href="resources/css/contactman.css">
 
 <!-- jQuery CDN -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <!-- Contact Manager JavaScript -->
-<script src="<c:url value="/resources/js/contactman.js" />"></script>
+<script src="resources/js/contactman.js"></script>
 
 </head>
 <body>

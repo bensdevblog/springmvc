@@ -33,7 +33,7 @@
 <h1>${msg}</h1>
 <div id="site_nav">
 	<div class="link"><a href="contact_manager">Contact Manager</a></div>
-	<div class="link"><a style="color:#888888">User Registration</a></div>
+	<div class="link"><a href="user_registration">User Registration</a></div>
 </div>
 </body>
 </html>
